@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -10,6 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com">
     </script>
+
+    <!-- Mailchimp CSS -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css" />
+
     <style>
         :root {
             --sage-dark: #5B6E5A;
@@ -25,9 +29,11 @@
             --charcoal-60: #63645C;
             --charcoal-35: #A3A49C;
         }
+
         * {
             box-sizing: border-box;
         }
+
         body {
             background-color: var(--cream);
             color: var(--charcoal);
@@ -36,6 +42,7 @@
             margin: 0;
             padding: 0;
         }
+
         .font-lora {
             font-family: 'Lora', serif;
         }
@@ -52,13 +59,14 @@
             font-size: 0.7rem;
         }
 
+        /* ---- Download button states ---- */
         .btn-download {
             background-color: var(--sage-dark);
             color: var(--cream);
             font-weight: 500;
             padding: 0.8rem 2rem;
             border-radius: 60px;
-            transition: background 0.25s ease, transform 0.1s ease;
+            transition: background 0.25s ease, transform 0.1s ease, opacity 0.3s;
             font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
             letter-spacing: 0.02em;
@@ -69,6 +77,7 @@
             gap: 0.6rem;
             text-decoration: none;
             line-height: 1;
+            position: relative;
         }
         .btn-download:hover {
             background-color: var(--gold);
@@ -80,6 +89,37 @@
         }
         .btn-download svg {
             flex-shrink: 0;
+        }
+
+        .btn-download.locked {
+            background-color: var(--charcoal-60);
+            opacity: 0.85;
+        }
+        .btn-download.locked:hover {
+            background-color: var(--charcoal-60);
+            opacity: 1;
+        }
+        .btn-download.locked .lock-icon {
+            display: inline-block;
+        }
+        .btn-download .lock-icon {
+            display: none;
+        }
+        .btn-download.unlocked .lock-icon {
+            display: none;
+        }
+        .btn-download.unlocked {
+            background-color: var(--sage-dark);
+            animation: pulse-glow 2s ease-in-out 1;
+        }
+        @keyframes pulse-glow {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(91, 110, 90, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(91, 110, 90, 0);
+            }
         }
 
         .guide-card {
@@ -121,9 +161,6 @@
         }
         .scroll-cue:hover {
             color: var(--sage-dark);
-        }
-        .scroll-cue svg {
-            transition: transform 0.2s;
         }
         .scroll-cue:hover svg {
             transform: translateY(3px);
@@ -172,12 +209,135 @@
             outline: 2px solid var(--gold-light);
             outline-offset: 3px;
         }
-        .btn-email svg {
-            flex-shrink: 0;
-        }
 
         .hidden-email {
             display: none;
+        }
+
+        /* ---- Mailchimp override ---- */
+        #mc_embed_signup {
+            background: transparent !important;
+            font-family: 'Poppins', sans-serif !important;
+            width: 100% !important;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #mc_embed_signup h2 {
+            font-family: 'Lora', serif !important;
+            font-weight: 600 !important;
+            color: var(--sage-dark) !important;
+            font-size: 2rem !important;
+            letter-spacing: -0.01em;
+        }
+        #mc_embed_signup .mc-field-group label {
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 500 !important;
+            color: var(--charcoal) !important;
+            font-size: 0.85rem !important;
+        }
+        #mc_embed_signup input {
+            font-family: 'Poppins', sans-serif !important;
+            border: 1px solid var(--sage-light) !important;
+            border-radius: 12px !important;
+            padding: 0.7rem 1rem !important;
+            background: #fff !important;
+            transition: border-color 0.2s;
+        }
+        #mc_embed_signup input:focus {
+            border-color: var(--sage) !important;
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(125, 143, 114, 0.15) !important;
+        }
+        #mc_embed_signup .button {
+            background-color: var(--sage-dark) !important;
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 500 !important;
+            border-radius: 60px !important;
+            padding: 0.8rem 2.5rem !important;
+            font-size: 0.95rem !important;
+            letter-spacing: 0.02em;
+            transition: background 0.25s ease !important;
+            border: none !important;
+            cursor: pointer;
+        }
+        #mc_embed_signup .button:hover {
+            background-color: var(--gold) !important;
+            color: #FAF7F0 !important;
+        }
+        #mc_embed_signup .indicates-required {
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 0.75rem !important;
+            color: var(--charcoal-60) !important;
+        }
+        #mc_embed_signup .asterisk {
+            color: var(--gold-deep) !important;
+        }
+        #mc_embed_signup .clear foot p {
+            display: none !important;
+        }
+        #mc_embed_signup .optionalParent {
+            margin-top: 0.5rem;
+        }
+        #mc_embed_signup .mc-field-group {
+            padding-bottom: 1rem !important;
+        }
+        #mc_embed_signup .response {
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 0.9rem !important;
+        }
+        #mc_embed_signup #mce-success-response {
+            color: var(--sage-dark) !important;
+        }
+        #mc_embed_signup #mce-error-response {
+            color: #b33 !important;
+        }
+        #mc_embed_signup .refferal_badge {
+            display: none !important;
+        }
+
+        /* ---- Form highlight animation ---- */
+        .form-highlight {
+            animation: glow-pulse 1.2s ease 2;
+            border-radius: 24px;
+        }
+        @keyframes glow-pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(176, 141, 87, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(176, 141, 87, 0);
+            }
+        }
+
+        /* ---- Toast notification ---- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--sage-dark);
+            color: var(--cream);
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            z-index: 999;
+            pointer-events: none;
+            max-width: 90vw;
+            text-align: center;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        .toast a {
+            color: var(--gold-light);
+            text-decoration: underline;
+            pointer-events: auto;
         }
 
         @media (max-width: 640px) {
@@ -195,7 +355,17 @@
             .guide-card {
                 border-radius: 18px;
             }
+            #mc_embed_signup h2 {
+                font-size: 1.6rem !important;
+            }
+            .toast {
+                font-size: 0.8rem;
+                padding: 0.8rem 1.2rem;
+                bottom: 16px;
+                width: 92vw;
+            }
         }
+
         @media (min-width: 641px) and (max-width: 1024px) {
             .hero-h1 {
                 font-size: 3.4rem !important;
@@ -224,6 +394,7 @@
             z-index: 0;
             pointer-events: none;
         }
+
         @media (max-width: 640px) {
             .bg-blob {
                 width: 300px;
@@ -245,11 +416,46 @@
             pointer-events: none;
             z-index: 0;
         }
+
+        .pdf-embed {
+            width: 100%;
+            height: 500px;
+            border: 1px solid var(--sage-light);
+            border-radius: 16px;
+            margin-top: 1.25rem;
+        }
+        @media (max-width: 640px) {
+            .pdf-embed {
+                height: 320px;
+            }
+        }
+
+        .subscription-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--gold-deep);
+            background: var(--gold-light);
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            margin-top: 0.5rem;
+        }
+        .subscription-badge.unlocked {
+            background: var(--sage-light);
+            color: var(--sage-dark);
+        }
     </style>
 </head>
 <body>
 
     <main class="relative overflow-hidden">
+
+        <!-- ===== TOAST NOTIFICATION ===== -->
+        <div id="toast" class="toast" role="alert" aria-live="polite">
+            <span id="toast-message">🎉 You're subscribed! Your download will start now.</span>
+        </div>
 
         <!-- ===== SECTION 1 — HERO ===== -->
         <section class="relative min-h-[80vh] flex items-center px-5 py-16 md:py-20 overflow-hidden">
@@ -272,8 +478,9 @@
                         Healthy meals, fitness tips, and mental balance — for a better you, one small habit at a time.
                     </p>
                     <p class="font-poppins text-base text-[#63645C] mt-5 max-w-md leading-relaxed">
-                        Two free guides, ready for you
+                        Two free guides — subscribe to unlock both.
                     </p>
+                    <a class="scroll-cue mt-4 inline-flex" href="#guide-one">
                         <span>See the guides</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M7 13l5 5 5-5" />
@@ -284,7 +491,7 @@
             </div>
         </section>
 
-        <!-- ===== SECTION 2 — GUIDE ONE: GUT HEALING RECIPES ===== -->
+        <!-- ===== SECTION 2 — GUIDE ONE ===== -->
         <section id="guide-one" class="px-5 py-12 md:py-20 scroll-mt-8">
             <div class="max-w-5xl mx-auto">
                 <div class="guide-card p-6 md:p-10">
@@ -299,7 +506,6 @@
                                     <p class="font-lora font-semibold text-[#5B6E5A] text-base leading-tight">Gut Healing Recipes</p>
                                     <p class="text-[9px] text-[#63645C] font-poppins">simple, soothing meals for digestion</p>
                                 </div>
-                                 
                                 <div class="mt-4 flex justify-between text-[7px] text-[#A3A49C] font-poppins tracking-wider">
                                     <span>✦ 7 recipes</span>
                                     <span>✦ 20 min prep</span>
@@ -311,32 +517,31 @@
                             <h2 class="font-lora font-semibold text-3xl md:text-4xl text-[#5B6E5A] leading-tight">Gut Healing Recipes</h2>
                             <p class="font-lora text-base text-[#63645C] mt-2 leading-relaxed">Simple, soothing meals for digestion</p>
                             <p class="font-poppins text-sm text-[#63645C] mt-3 leading-relaxed max-w-md">
-                                A collection of gentle, anti-inflammatory recipes designed to support your digestion and calm your gut. Quick, delicious, and made with love—because nourishing your body should feel good.
+                                A collection of gentle, anti-inflammatory recipes designed to support your digestion and calm your gut.
                             </p>
-                            <div class="mt-5">
-                        <a href="THE GUT-HEALING Kitchen seven recipes to calm, restore, and nourish_20260721_095811_٠٠٠٠.pdf" download
-           class="btn-download">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-          </svg>
-          Download PDF
-        </a>
-      </div>
-      <!-- Inline PDF viewer -->
-      <embed
-        src="THE GUT-HEALING Kitchen seven recipes to calm, restore, and nourish_20260721_095811_٠٠٠٠.pdf"
-        type="application/pdf"
-        class="pdf-embed"
-      />
-      <p class="text-xs text-[#A3A49C] mt-2 text-center">
-        If the PDF doesn’t display, your browser may not support embedded PDFs.
-        Use the download button above.
-      </p>
-    </section>       
-           
-       
 
-        <!-- ===== SECTION 3 — GUIDE TWO: SELF-CARE RESET ===== -->
+                            <div class="mt-5">
+                                <button class="btn-download locked" data-guide="gut-healing" data-pdf="THE GUT-HEALING Kitchen seven recipes to calm, restore, and nourish_20260721_095811_٠٠٠٠.pdf" aria-label="Subscribe to download Gut Healing Recipes">
+                                    <span class="lock-icon"></span>
+                                    <span class="btn-text"> Sign up to get the Free Guide</span>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                </button>
+                                <span class="subscription-badge" id="badge-gut-healing"></span>
+                            </div>
+
+                            <embed src="THE GUT-HEALING Kitchen seven recipes to calm, restore, and nourish_20260721_095811_٠٠٠٠.pdf" type="application/pdf" class="pdf-embed" />
+                            <p class="text-xs text-[#A3A49C] mt-2 text-center">
+                                If the PDF doesn't display, use the download button after subscribing.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 3 — GUIDE TWO ===== -->
         <section id="guide-two" class="px-5 py-8 md:py-16 scroll-mt-8">
             <div class="max-w-5xl mx-auto">
                 <div class="guide-card p-6 md:p-10">
@@ -346,31 +551,1417 @@
                             <h2 class="font-lora font-semibold text-3xl md:text-4xl text-[#5B6E5A] leading-tight">Self-Care Reset</h2>
                             <p class="font-lora text-base text-[#63645C] mt-2 leading-relaxed">Gentle routines for everyday calm</p>
                             <p class="font-poppins text-sm text-[#63645C] mt-3 leading-relaxed max-w-md">
-                                Rediscover the joy of slowing down. This guide offers simple, nurturing routines to help you reset your mind, body, and spirit—because you deserve a moment just for you.
+                                Rediscover the joy of slowing down with simple, nurturing routines for mind, body, and spirit.
                             </p>
+
                             <div class="mt-5">
-                        <a href="HEALTH SIGNAL S T U D I O_20260723_164919_٠٠٠٠.pdf" download
-           class="btn-download">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-          </svg>
-          Download PDF
-             </a>
-      </div>
-      <!-- Inline PDF viewer -->
-      <embed
-        src="HEALTH SIGNAL S T U D I O_20260723_164919_٠٠٠٠.pdf"
-        type="application/pdf"
-        class="pdf-embed"
-      />
-      <p class="text-xs text-[#A3A49C] mt-2 text-center">
-        If the PDF doesn’t display, your browser may not support embedded PDFs.
-        Use the download button above.
-      </p>        
+                                <button class="btn-download locked" data-guide="self-care" data-pdf="HEALTH SIGNAL S T U D I O_20260723_164919_٠٠٠٠.pdf" aria-label="Subscribe to download Self-Care Reset">
+                                    <span class="lock-icon"></span>
+                                    <span class="btn-text">Sign up to get the Free Guide</span>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                </button>
+                                <span class="subscription-badge" id="badge-self-care"></span>
+                            </div>
+
+                            <embed src="HEALTH SIGNAL S T U D I O_20260723_164919_٠٠٠٠.pdf" type="application/pdf" class="pdf-embed" />
+                            <p class="text-xs text-[#A3A49C] mt-2 text-center">
+                                If the PDF doesn't display, use the download button after subscribing.
+                            </p>
+                        </div>
+                        <div class="flex justify-center md:justify-end order-1 md:order-2">
+                            <div class="cover-mockup rotate-3">
+                                <div class="flex justify-between items-center border-b border-[#D9C6A0] pb-2">
+                                    <span class="text-[9px] font-poppins tracking-[0.15em] text-[#8C6B3E] uppercase">Health Signal</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" stroke="#7D8F72" stroke-width="1.8" fill="none"><path d="M12 2v4M12 22v-4M4 12H2M22 12h-2M19.07 4.93l-2.83 2.83M6.93 17.07l-2.83 2.83M4.93 4.93l2.83 2.83M17.07 17.07l2.83 2.83"/><circle cx="12" cy="12" r="4"/></svg>
+                                </div>
+                                <div class="mt-3">
+                                    <p class="font-lora font-semibold text-[#5B6E5A] text-base leading-tight">Self-Care Reset</p>
+                                    <p class="text-[9px] text-[#63645C] font-poppins">gentle routines for everyday calm</p>
+                                </div>
+                                <div class="mt-4 flex justify-between text-[7px] text-[#A3A49C] font-poppins tracking-wider">
+                                    <span>✦ 12 practices</span>
+                                    <span>✦ 5 min daily</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- ===== SECTION 4 — CONTACT ===== -->
+        <!-- ===== SECTION 4 — MAILCHIMP SIGNUP ===== -->
+        <section id="subscribe" class="px-5 py-16 md:py-24 scroll-mt-8">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="kicker-label block mb-2">STAY IN TOUCH</span>
+                <h2 class="font-lora font-semibold text-3xl md:text-4xl text-[#5B6E5A] leading-tight">
+                    Subscribe to unlock your guides
+                </h2>
+                <p class="font-poppins text-base text-[#63645C] mt-3 leading-relaxed max-w-md mx-auto">
+                    Enter your email below. Once you subscribe, your downloads will be unlocked immediately.
+                </p>
+
+                <div class="mt-8" id="signup-form-container">
+                    <!-- ===== MAILCHIMP FORM ===== -->
+                    <div id="mc_embed_shell">
+
+                        <div id="mc_embed_signup">
+                            <form action="https://gmail.us14.list-manage.com/subscribe/post?u=1a7a9baafcb6d5b8acee115a6&amp;id=5f50ccf937&amp;f_id=0084b5e5f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                                <div id="mc_embed_signup_scroll">
+                                    <h2>Subscribe</h2>
+                                    <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+
+                                    <div class="mc-field-group">
+                                        <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                                        <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value="" placeholder="you@example.com" />
+                                    </div>
+
+                                    <div class="mc-field-group">
+                                        <label for="mce-FNAME">First Name</label>
+                                        <input type="text" name="FNAME" class="text" id="mce-FNAME" value="" placeholder="Your first name" />
+                                    </div>
+
+                                    <div id="mce-responses" class="clear foot">
+                                        <div class="response" id="mce-error-response" style="display: none;"></div>
+                                        <div class="response" id="mce-success-response" style="display: none;"></div>
+                                    </div>
+
+                                    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
+                                        <input type="text" name="b_1a7a9baafcb6d5b8acee115a6_5f50ccf937" tabindex="-1" value="" />
+                                    </div>
+
+                                    <div class="optionalParent">
+                                        <div class="clear foot">
+                                            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe" />
+                                            <p style="margin: 0px auto;">
+                                                <a href="http://eepurl.com/tbiiwvBPje" title="Mailchimp - email marketing made easy and fun">
+                                                    <span style="display: inline-block; background-color: transparent; border-radius: 4px;">
+                                                        <img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;" />
+                                                    </span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js">
+                        </script>
+                        <script type="text/javascript">
+                            (function($) {
+                                window.fnames = new Array();
+                                window.ftypes = new Array();
+                                fnames[0] = 'EMAIL';
+                                ftypes[0] = 'email';
+                                fnames[1] = 'FNAME';
+                                ftypes[1] = 'text';
+                                fnames[2] = 'LNAME';
+                                ftypes[2] = 'text';
+                                fnames[3] = 'ADDRESS';
+                                ftypes[3] = 'address';
+                                fnames[4] = 'PHONE';
+                                ftypes[4] = 'phone';
+                                fnames[5] = 'BIRTHDAY';
+                                ftypes[5] = 'birthday';
+                                fnames[6] = 'COMPANY';
+                                ftypes[6] = 'text';
+                            }(jQuery));
+                            var $mcj = jQuery.noConflict(true);
+
+                            // SMS Phone Multi-Country Functionality (kept for compatibility)
+                            if (!window.MC) {
+                                window.MC = {};
+                            }
+                            window.MC.smsPhoneData = {
+                                defaultCountryCode: 'EG',
+                                programs: [],
+                                smsProgramDataCountryNames: []
+                            };
+
+                            function getCountryUnicodeFlag(countryCode) {
+                                return countryCode.toUpperCase().replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) +
+                                    127397))
+                            };
+
+                            function sanitizeHtml(str) {
+                                if (typeof str !== 'string') return '';
+                                return str
+                                    .replace(/&/g, '&amp;')
+                                    .replace(/</g, '&lt;')
+                                    .replace(/>/g, '&gt;')
+                                    .replace(/"/g, '&quot;')
+                                    .replace(/'/g, '&#x27;')
+                                    .replace(/\//g, '&#x2F;');
+                            }
+
+                            function sanitizeUrl(url) {
+                                if (typeof url !== 'string') return '';
+                                const trimmedUrl = url.trim().toLowerCase();
+                                if (trimmedUrl.startsWith('javascript:') || trimmedUrl.startsWith('data:') || trimmedUrl
+                                    .startsWith('vbscript:')) {
+                                    return '#';
+                                }
+                                return url;
+                            }
+
+                            const getBrowserLanguage = () => {
+                                if (!window?.navigator?.language?.split('-')[1]) {
+                                    return window?.navigator?.language?.toUpperCase();
+                                }
+                                return window?.navigator?.language?.split('-')[1];
+                            };
+
+                            function getDefaultCountryProgram(defaultCountryCode, smsProgramData) {
+                                if (!smsProgramData || smsProgramData.length === 0) {
+                                    return null;
+                                }
+                                const browserLanguage = getBrowserLanguage();
+                                if (browserLanguage) {
+                                    const foundProgram = smsProgramData.find(
+                                        (program) => program?.countryCode === browserLanguage,
+                                    );
+                                    if (foundProgram) {
+                                        return foundProgram;
+                                    }
+                                }
+                                if (defaultCountryCode) {
+                                    const foundProgram = smsProgramData.find(
+                                        (program) => program?.countryCode === defaultCountryCode,
+                                    );
+                                    if (foundProgram) {
+                                        return foundProgram;
+                                    }
+                                }
+                                return smsProgramData[0];
+                            }
+
+                            function updateSmsLegalText(countryCode, fieldName) {
+                                if (!countryCode || !fieldName) {
+                                    return;
+                                }
+                                const programs = window?.MC?.smsPhoneData?.programs;
+                                if (!programs || !Array.isArray(programs)) {
+                                    return;
+                                }
+                                const program = programs.find(program => program?.countryCode === countryCode);
+                                if (!program || !program.requiredTemplate) {
+                                    return;
+                                }
+                                var smsConsentHtmlRenderingFixEnabled = true;
+                                const legalTextElement = document.querySelector('#legal-text-' + fieldName);
+                                if (!legalTextElement) {
+                                    return;
+                                }
+                                const divRegex = new RegExp('</?[div][^>]*>', 'gi');
+                                const blockWrapperRegex = new RegExp('</?(?:div|p)[^>]*>', 'gi');
+                                const fullAnchorRegex = new RegExp('<a.*?</a>', 'g');
+                                const anchorRegex = new RegExp('<a href="(.*?)" target="(.*?)">(.*?)</a>');
+                                const template = smsConsentHtmlRenderingFixEnabled ?
+                                    program.requiredTemplate
+                                    .replace(/<\/p>\s*<p[^>]*>/gi, ' ')
+                                    .replace(blockWrapperRegex, '') :
+                                    program.requiredTemplate.replace(divRegex, '');
+                                legalTextElement.textContent = '';
+                                const parts = template.split(/(<a href=".*?" target=".*?">.*?<\/a>)/g);
+                                parts.forEach(function(part) {
+                                    if (!part) {
+                                        return;
+                                    }
+                                    const anchorMatch = part.match(/<a href="(.*?)" target="(.*?)">(.*?)<\/a>/);
+                                    if (anchorMatch) {
+                                        const linkElement = document.createElement('a');
+                                        linkElement.href = sanitizeUrl(anchorMatch[1]);
+                                        linkElement.target = sanitizeHtml(anchorMatch[2]);
+                                        linkElement.textContent = sanitizeHtml(anchorMatch[3]);
+                                        legalTextElement.appendChild(linkElement);
+                                    } else {
+                                        legalTextElement.appendChild(document.createTextNode(part));
+                                    }
+                                });
+                            }
+
+                            function generateDropdownOptions(smsProgramData) {
+                                if (!smsProgramData || smsProgramData.length === 0) {
+                                    return '';
+                                }
+                                var programs = false ?
+                                    smsProgramData.filter(function(p, i, arr) {
+                                        return arr.findIndex(function(q) { return q.countryCode === p.countryCode; }) ===
+                                        i;
+                                    }) :
+                                    smsProgramData;
+                                return programs.map(program => {
+                                    const flag = getCountryUnicodeFlag(program.countryCode);
+                                    const countryName = getCountryName(program.countryCode);
+                                    const callingCode = program.countryCallingCode || '';
+                                    const sanitizedCountryCode = sanitizeHtml(program.countryCode || '');
+                                    const sanitizedCountryName = sanitizeHtml(countryName || '');
+                                    const sanitizedCallingCode = sanitizeHtml(callingCode || '');
+                                    return '<option value="' + sanitizedCountryCode + '">' + sanitizedCountryName +
+                                        ' ' + sanitizedCallingCode + '</option>';
+                                }).join('');
+                            }
+
+                            function getCountryName(countryCode) {
+                                if (window.MC?.smsPhoneData?.smsProgramDataCountryNames && Array.isArray(window.MC
+                                        .smsPhoneData.smsProgramDataCountryNames)) {
+                                    for (let i = 0; i < window.MC.smsPhoneData.smsProgramDataCountryNames.length; i++) {
+                                        if (window.MC.smsPhoneData.smsProgramDataCountryNames[i].code === countryCode) {
+                                            return window.MC.smsPhoneData.smsProgramDataCountryNames[i].name;
+                                        }
+                                    }
+                                }
+                                return countryCode;
+                            }
+
+                            function getDefaultPlaceholder(countryCode) {
+                                if (!countryCode || typeof countryCode !== 'string') {
+                                    return '+1 000 000 0000';
+                                }
+                                var mockPlaceholders = [{
+                                    countryCode: 'US',
+                                    placeholder: '+1 000 000 0000',
+                                    helpText: 'Include the US country code +1 before the phone number',
+                                }, {
+                                    countryCode: 'GB',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the GB country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'CA',
+                                    placeholder: '+1 000 000 0000',
+                                    helpText: 'Include the CA country code +1 before the phone number',
+                                }, {
+                                    countryCode: 'AU',
+                                    placeholder: '+61 000 000 000',
+                                    helpText: 'Include the AU country code +61 before the phone number',
+                                }, {
+                                    countryCode: 'DE',
+                                    placeholder: '+49 000 0000000',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die DE-Ländervorwahl +49 ein',
+                                }, {
+                                    countryCode: 'FR',
+                                    placeholder: '+33 0 00 00 00 00',
+                                    helpText: 'Incluez le code pays FR +33 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'ES',
+                                    placeholder: '+34 000 000 000',
+                                    helpText: 'Incluya el código de país ES +34 antes del número de teléfono',
+                                }, {
+                                    countryCode: 'NL',
+                                    placeholder: '+31 0 00000000',
+                                    helpText: 'Voeg de NL-landcode +31 toe vóór het telefoonnummer',
+                                }, {
+                                    countryCode: 'BE',
+                                    placeholder: '+32 000 00 00 00',
+                                    helpText: 'Incluez le code pays BE +32 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'CH',
+                                    placeholder: '+41 00 000 00 00',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die CH-Ländervorwahl +41 ein',
+                                }, {
+                                    countryCode: 'AT',
+                                    placeholder: '+43 000 000 0000',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die AT-Ländervorwahl +43 ein',
+                                }, {
+                                    countryCode: 'IE',
+                                    placeholder: '+353 00 000 0000',
+                                    helpText: 'Include the IE country code +353 before the phone number',
+                                }, {
+                                    countryCode: 'IT',
+                                    placeholder: '+39 000 000 0000',
+                                    helpText: 'Includere il prefisso internazionale IT +39 prima del numero di telefono',
+                                }, {
+                                    countryCode: 'NO',
+                                    placeholder: '+47 000 00 000',
+                                    helpText: 'Inkluder NO landskode +47 før telefonnummeret',
+                                }, {
+                                    countryCode: 'SE',
+                                    placeholder: '+46 00 000 00 00',
+                                    helpText: 'Inkludera SE landskod +46 före telefonnumret',
+                                }, {
+                                    countryCode: 'DK',
+                                    placeholder: '+45 00 00 00 00',
+                                    helpText: 'Inkluder DK landekode +45 før telefonnummeret',
+                                }, {
+                                    countryCode: 'FI',
+                                    placeholder: '+358 00 000 0000',
+                                    helpText: 'Sisällytä FI-maakoodi +358 ennen puhelinnumeroa',
+                                }, {
+                                    countryCode: 'EE',
+                                    placeholder: '+372 0000 0000',
+                                    helpText: 'Lisage EE riigikood +372 telefoninumbri ette',
+                                }, {
+                                    countryCode: 'PL',
+                                    placeholder: '+48 000 000 000',
+                                    helpText: 'Podaj numer kierunkowy PL +48 przed numerem telefonu',
+                                }, {
+                                    countryCode: 'SK',
+                                    placeholder: '+421 000 000 000',
+                                    helpText: 'Pred telefónne číslo uveďte kód krajiny SK +421',
+                                }, {
+                                    countryCode: 'LV',
+                                    placeholder: '+371 0000 0000',
+                                    helpText: 'Iekļaujiet LV valsts kodu +371 pirms tālruņa numura',
+                                }, {
+                                    countryCode: 'LT',
+                                    placeholder: '+370 0000 0000',
+                                    helpText: 'Įtraukite LT šalies kodą +370 prieš telefono numerį',
+                                }, {
+                                    countryCode: 'GR',
+                                    placeholder: '+30 000 000 0000',
+                                    helpText: 'Συμπεριλάβετε τον κωδικό χώρας GR +30 πριν από τον αριθμό τηλεφώνου',
+                                }, {
+                                    countryCode: 'PT',
+                                    placeholder: '+351 000 000 000',
+                                    helpText: 'Inclua o código de país PT +351 antes do número de telefone',
+                                }, {
+                                    countryCode: 'HR',
+                                    placeholder: '+385 00 000 0000',
+                                    helpText: 'Uključite HR pozivni broj države +385 prije telefonskog broja',
+                                }, {
+                                    countryCode: 'SI',
+                                    placeholder: '+386 00 000 000',
+                                    helpText: 'Vključite SI kodo države +386 pred telefonsko številko',
+                                }, {
+                                    countryCode: 'IS',
+                                    placeholder: '+354 000 0000',
+                                    helpText: 'Láttu IS landsnúmer +354 fylgja á undan símanúmerinu',
+                                }, {
+                                    countryCode: 'LU',
+                                    placeholder: '+352 000 000 000',
+                                    helpText: 'Incluez le code pays LU +352 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'MC',
+                                    placeholder: '+377 00 00 00 00',
+                                    helpText: 'Incluez le code pays MC +377 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'AD',
+                                    placeholder: '+376 000 000',
+                                    helpText: 'Incloeu el codi de país AD +376 abans del número de telèfon',
+                                }, {
+                                    countryCode: 'JE',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the JE country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'IM',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the IM country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'GG',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the GG country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'AL',
+                                    placeholder: '+355 00 000 0000',
+                                    helpText: 'Përfshini kodin e vendit AL +355 para numrit të telefonit',
+                                }, {
+                                    countryCode: 'SM',
+                                    placeholder: '+378 0000 000000',
+                                    helpText: 'Includere il prefisso internazionale SM +378 prima del numero di telefono',
+                                }, {
+                                    countryCode: 'FO',
+                                    placeholder: '+298 000000',
+                                    helpText: 'Inkluder FO landekode +298 før telefonnummeret',
+                                }, {
+                                    countryCode: 'MT',
+                                    placeholder: '+356 0000 0000',
+                                    helpText: 'Include the MT country code +356 before the phone number',
+                                }, {
+                                    countryCode: 'LI',
+                                    placeholder: '+423 000 0000',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die LI-Ländervorwahl +423 ein',
+                                }, {
+                                    countryCode: 'GI',
+                                    placeholder: '+350 000 00000',
+                                    helpText: 'Include the GI country code +350 before the phone number',
+                                }, {
+                                    countryCode: 'MD',
+                                    placeholder: '+373 00 000 000',
+                                    helpText: 'Includeți codul de țară MD +373 înaintea numărului de telefon',
+                                }, {
+                                    countryCode: 'HU',
+                                    placeholder: '+36 00 000 0000',
+                                    helpText: 'A telefonszám előtt adja meg a HU országkódot +36',
+                                }, {
+                                    countryCode: 'NZ',
+                                    placeholder: '+64 00 000 0000',
+                                    helpText: 'Include the NZ country code +64 before the phone number',
+                                }, {
+                                    countryCode: 'ME',
+                                    placeholder: '+382 00 000 000',
+                                    helpText: 'Uključite ME pozivni broj države +382 prije telefonskog broja',
+                                }, ];
+                                const selectedPlaceholder = mockPlaceholders.find(function(item) {
+                                    return item && item.countryCode === countryCode;
+                                });
+                                return selectedPlaceholder ? selectedPlaceholder.placeholder : mockPlaceholders[0]
+                                    .placeholder;
+                            }
+
+                            function updatePlaceholder(countryCode, fieldName) {
+                                if (!countryCode || !fieldName) {
+                                    return;
+                                }
+                                const phoneInput = document.querySelector('#mce-' + fieldName);
+                                if (!phoneInput) {
+                                    return;
+                                }
+                                const placeholder = getDefaultPlaceholder(countryCode);
+                                if (placeholder) {
+                                    phoneInput.placeholder = placeholder;
+                                }
+                            }
+
+                            function updateCountryCodeInstruction(countryCode, fieldName) {
+                                updatePlaceholder(countryCode, fieldName);
+                            }
+
+                            function getDefaultHelpText(countryCode) {
+                                var mockPlaceholders = [{
+                                    countryCode: 'US',
+                                    placeholder: '+1 000 000 0000',
+                                    helpText: 'Include the US country code +1 before the phone number',
+                                }, {
+                                    countryCode: 'GB',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the GB country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'CA',
+                                    placeholder: '+1 000 000 0000',
+                                    helpText: 'Include the CA country code +1 before the phone number',
+                                }, {
+                                    countryCode: 'AU',
+                                    placeholder: '+61 000 000 000',
+                                    helpText: 'Include the AU country code +61 before the phone number',
+                                }, {
+                                    countryCode: 'DE',
+                                    placeholder: '+49 000 0000000',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die DE-Ländervorwahl +49 ein',
+                                }, {
+                                    countryCode: 'FR',
+                                    placeholder: '+33 0 00 00 00 00',
+                                    helpText: 'Incluez le code pays FR +33 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'ES',
+                                    placeholder: '+34 000 000 000',
+                                    helpText: 'Incluya el código de país ES +34 antes del número de teléfono',
+                                }, {
+                                    countryCode: 'NL',
+                                    placeholder: '+31 0 00000000',
+                                    helpText: 'Voeg de NL-landcode +31 toe vóór het telefoonnummer',
+                                }, {
+                                    countryCode: 'BE',
+                                    placeholder: '+32 000 00 00 00',
+                                    helpText: 'Incluez le code pays BE +32 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'CH',
+                                    placeholder: '+41 00 000 00 00',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die CH-Ländervorwahl +41 ein',
+                                }, {
+                                    countryCode: 'AT',
+                                    placeholder: '+43 000 000 0000',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die AT-Ländervorwahl +43 ein',
+                                }, {
+                                    countryCode: 'IE',
+                                    placeholder: '+353 00 000 0000',
+                                    helpText: 'Include the IE country code +353 before the phone number',
+                                }, {
+                                    countryCode: 'IT',
+                                    placeholder: '+39 000 000 0000',
+                                    helpText: 'Includere il prefisso internazionale IT +39 prima del numero di telefono',
+                                }, {
+                                    countryCode: 'NO',
+                                    placeholder: '+47 000 00 000',
+                                    helpText: 'Inkluder NO landskode +47 før telefonnummeret',
+                                }, {
+                                    countryCode: 'SE',
+                                    placeholder: '+46 00 000 00 00',
+                                    helpText: 'Inkludera SE landskod +46 före telefonnumret',
+                                }, {
+                                    countryCode: 'DK',
+                                    placeholder: '+45 00 00 00 00',
+                                    helpText: 'Inkluder DK landekode +45 før telefonnummeret',
+                                }, {
+                                    countryCode: 'FI',
+                                    placeholder: '+358 00 000 0000',
+                                    helpText: 'Sisällytä FI-maakoodi +358 ennen puhelinnumeroa',
+                                }, {
+                                    countryCode: 'EE',
+                                    placeholder: '+372 0000 0000',
+                                    helpText: 'Lisage EE riigikood +372 telefoninumbri ette',
+                                }, {
+                                    countryCode: 'PL',
+                                    placeholder: '+48 000 000 000',
+                                    helpText: 'Podaj numer kierunkowy PL +48 przed numerem telefonu',
+                                }, {
+                                    countryCode: 'SK',
+                                    placeholder: '+421 000 000 000',
+                                    helpText: 'Pred telefónne číslo uveďte kód krajiny SK +421',
+                                }, {
+                                    countryCode: 'LV',
+                                    placeholder: '+371 0000 0000',
+                                    helpText: 'Iekļaujiet LV valsts kodu +371 pirms tālruņa numura',
+                                }, {
+                                    countryCode: 'LT',
+                                    placeholder: '+370 0000 0000',
+                                    helpText: 'Įtraukite LT šalies kodą +370 prieš telefono numerį',
+                                }, {
+                                    countryCode: 'GR',
+                                    placeholder: '+30 000 000 0000',
+                                    helpText: 'Συμπεριλάβετε τον κωδικό χώρας GR +30 πριν από τον αριθμό τηλεφώνου',
+                                }, {
+                                    countryCode: 'PT',
+                                    placeholder: '+351 000 000 000',
+                                    helpText: 'Inclua o código de país PT +351 antes do número de telefone',
+                                }, {
+                                    countryCode: 'HR',
+                                    placeholder: '+385 00 000 0000',
+                                    helpText: 'Uključite HR pozivni broj države +385 prije telefonskog broja',
+                                }, {
+                                    countryCode: 'SI',
+                                    placeholder: '+386 00 000 000',
+                                    helpText: 'Vključite SI kodo države +386 pred telefonsko številko',
+                                }, {
+                                    countryCode: 'IS',
+                                    placeholder: '+354 000 0000',
+                                    helpText: 'Láttu IS landsnúmer +354 fylgja á undan símanúmerinu',
+                                }, {
+                                    countryCode: 'LU',
+                                    placeholder: '+352 000 000 000',
+                                    helpText: 'Incluez le code pays LU +352 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'MC',
+                                    placeholder: '+377 00 00 00 00',
+                                    helpText: 'Incluez le code pays MC +377 avant le numéro de téléphone',
+                                }, {
+                                    countryCode: 'AD',
+                                    placeholder: '+376 000 000',
+                                    helpText: 'Incloeu el codi de país AD +376 abans del número de telèfon',
+                                }, {
+                                    countryCode: 'JE',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the JE country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'IM',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the IM country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'GG',
+                                    placeholder: '+44 0000 000000',
+                                    helpText: 'Include the GG country code +44 before the phone number',
+                                }, {
+                                    countryCode: 'AL',
+                                    placeholder: '+355 00 000 0000',
+                                    helpText: 'Përfshini kodin e vendit AL +355 para numrit të telefonit',
+                                }, {
+                                    countryCode: 'SM',
+                                    placeholder: '+378 0000 000000',
+                                    helpText: 'Includere il prefisso internazionale SM +378 prima del numero di telefono',
+                                }, {
+                                    countryCode: 'FO',
+                                    placeholder: '+298 000000',
+                                    helpText: 'Inkluder FO landekode +298 før telefonnummeret',
+                                }, {
+                                    countryCode: 'MT',
+                                    placeholder: '+356 0000 0000',
+                                    helpText: 'Include the MT country code +356 before the phone number',
+                                }, {
+                                    countryCode: 'LI',
+                                    placeholder: '+423 000 0000',
+                                    helpText: 'Fügen Sie vor der Telefonnummer die LI-Ländervorwahl +423 ein',
+                                }, {
+                                    countryCode: 'GI',
+                                    placeholder: '+350 000 00000',
+                                    helpText: 'Include the GI country code +350 before the phone number',
+                                }, {
+                                    countryCode: 'MD',
+                                    placeholder: '+373 00 000 000',
+                                    helpText: 'Includeți codul de țară MD +373 înaintea numărului de telefon',
+                                }, {
+                                    countryCode: 'HU',
+                                    placeholder: '+36 00 000 0000',
+                                    helpText: 'A telefonszám előtt adja meg a HU országkódot +36',
+                                }, {
+                                    countryCode: 'NZ',
+                                    placeholder: '+64 00 000 0000',
+                                    helpText: 'Include the NZ country code +64 before the phone number',
+                                }, {
+                                    countryCode: 'ME',
+                                    placeholder: '+382 00 000 000',
+                                    helpText: 'Uključite ME pozivni broj države +382 prije telefonskog broja',
+                                }, ];
+                                if (!countryCode || typeof countryCode !== 'string') {
+                                    return mockPlaceholders[0].helpText;
+                                }
+                                const selectedHelpText = mockPlaceholders.find(function(item) {
+                                    return item && item.countryCode === countryCode;
+                                });
+                                return selectedHelpText ? selectedHelpText.helpText : mockPlaceholders[0].helpText;
+                            }
+
+                            function setDefaultHelpText(countryCode) {
+                                const helpTextSpan = document.querySelector('#help-text');
+                                if (!helpTextSpan) {
+                                    return;
+                                }
+                            }
+
+                            function updateHelpTextCountryCode(countryCode, fieldName) {
+                                if (!countryCode || !fieldName) {
+                                    return;
+                                }
+                                setDefaultHelpText(countryCode);
+                            }
+
+                            function initializeSmsPhoneDropdown(fieldName) {
+                                if (!fieldName || typeof fieldName !== 'string') {
+                                    return;
+                                }
+                                const dropdown = document.querySelector('#country-select-' + fieldName);
+                                const displayFlag = document.querySelector('#flag-display-' + fieldName);
+                                if (!dropdown || !displayFlag) {
+                                    return;
+                                }
+                                const smsPhoneData = window.MC?.smsPhoneData;
+                                if (smsPhoneData && smsPhoneData.programs && Array.isArray(smsPhoneData.programs)) {
+                                    dropdown.innerHTML = generateDropdownOptions(smsPhoneData.programs);
+                                }
+                                const defaultProgram = getDefaultCountryProgram(smsPhoneData?.defaultCountryCode,
+                                    smsPhoneData?.programs);
+                                if (defaultProgram && defaultProgram.countryCode) {
+                                    dropdown.value = defaultProgram.countryCode;
+                                    const flagSpan = displayFlag?.querySelector('#flag-emoji-' + fieldName);
+                                    if (flagSpan) {
+                                        flagSpan.textContent = getCountryUnicodeFlag(defaultProgram.countryCode);
+                                        flagSpan.setAttribute('aria-label', sanitizeHtml(defaultProgram.countryCode) +
+                                            ' flag');
+                                    }
+                                    updateSmsLegalText(defaultProgram.countryCode, fieldName);
+                                    updatePlaceholder(defaultProgram.countryCode, fieldName);
+                                    updateCountryCodeInstruction(defaultProgram.countryCode, fieldName);
+                                }
+                                var smsNotRequiredRemoveCountryCodeEnabled = true;
+                                var smsField = Object.values({
+                                    "EMAIL": {
+                                        "name": "EMAIL",
+                                        "label": "Email Address",
+                                        "helper_text": "",
+                                        "type": "email",
+                                        "required": true,
+                                        "audience_field_name": "Email Address",
+                                        "merge_id": 0,
+                                        "help_text_enabled": false,
+                                        "enabled": true,
+                                        "order": 0,
+                                        "field_type": "merge"
+                                    },
+                                    "FNAME": {
+                                        "name": "FNAME",
+                                        "label": "First Name",
+                                        "helper_text": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "audience_field_name": "First Name",
+                                        "merge_id": 1,
+                                        "help_text_enabled": false,
+                                        "enabled": true,
+                                        "order": 1,
+                                        "field_type": "merge"
+                                    },
+                                    "LNAME": {
+                                        "name": "LNAME",
+                                        "label": "Last Name",
+                                        "helper_text": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "audience_field_name": "Last Name",
+                                        "enabled": false,
+                                        "order": null,
+                                        "field_type": "merge",
+                                        "merge_id": 2
+                                    },
+                                    "ADDRESS": {
+                                        "name": "ADDRESS",
+                                        "label": "Address",
+                                        "helper_text": "",
+                                        "type": "address",
+                                        "required": false,
+                                        "audience_field_name": "Address",
+                                        "enabled": false,
+                                        "order": null,
+                                        "field_type": "merge",
+                                        "merge_id": 3,
+                                        "countries": {
+                                            "2": "Albania",
+                                            "3": "Algeria",
+                                            "4": "Andorra",
+                                            "5": "Angola",
+                                            "6": "Argentina",
+                                            "7": "Armenia",
+                                            "8": "Australia",
+                                            "9": "Austria",
+                                            "10": "Azerbaijan",
+                                            "11": "Bahamas",
+                                            "12": "Bahrain",
+                                            "13": "Bangladesh",
+                                            "14": "Barbados",
+                                            "15": "Belarus",
+                                            "16": "Belgium",
+                                            "17": "Belize",
+                                            "18": "Benin",
+                                            "19": "Bermuda",
+                                            "20": "Bhutan",
+                                            "21": "Bolivia",
+                                            "22": "Bosnia and Herzegovina",
+                                            "23": "Botswana",
+                                            "24": "Brazil",
+                                            "25": "Bulgaria",
+                                            "26": "Burkina Faso",
+                                            "27": "Burundi",
+                                            "28": "Cambodia",
+                                            "29": "Cameroon",
+                                            "30": "Canada",
+                                            "31": "Cape Verde",
+                                            "32": "Cayman Islands",
+                                            "33": "Central African Republic",
+                                            "34": "Chad",
+                                            "35": "Chile",
+                                            "36": "China",
+                                            "37": "Colombia",
+                                            "38": "Congo",
+                                            "40": "Croatia",
+                                            "41": "Cyprus",
+                                            "42": "Czech Republic",
+                                            "43": "Denmark",
+                                            "44": "Djibouti",
+                                            "45": "Ecuador",
+                                            "46": "Egypt",
+                                            "47": "El Salvador",
+                                            "48": "Equatorial Guinea",
+                                            "49": "Eritrea",
+                                            "50": "Estonia",
+                                            "51": "Ethiopia",
+                                            "52": "Fiji",
+                                            "53": "Finland",
+                                            "54": "France",
+                                            "56": "Gabon",
+                                            "57": "Gambia",
+                                            "58": "Georgia",
+                                            "59": "Germany",
+                                            "60": "Ghana",
+                                            "61": "Greece",
+                                            "63": "Guinea",
+                                            "64": "Guinea-Bissau",
+                                            "65": "Guyana",
+                                            "66": "Honduras",
+                                            "67": "Hong Kong",
+                                            "68": "Hungary",
+                                            "69": "Iceland",
+                                            "70": "India",
+                                            "71": "Indonesia",
+                                            "74": "Ireland",
+                                            "75": "Israel",
+                                            "76": "Italy",
+                                            "78": "Japan",
+                                            "79": "Jordan",
+                                            "80": "Kazakhstan",
+                                            "81": "Kenya",
+                                            "82": "Kuwait",
+                                            "83": "Kyrgyzstan",
+                                            "84": "Lao People's Democratic Republic",
+                                            "85": "Latvia",
+                                            "86": "Lebanon",
+                                            "87": "Lesotho",
+                                            "88": "Liberia",
+                                            "90": "Liechtenstein",
+                                            "91": "Lithuania",
+                                            "92": "Luxembourg",
+                                            "93": "Macedonia",
+                                            "94": "Madagascar",
+                                            "95": "Malawi",
+                                            "96": "Malaysia",
+                                            "97": "Maldives",
+                                            "98": "Mali",
+                                            "99": "Malta",
+                                            "100": "Mauritania",
+                                            "101": "Mexico",
+                                            "102": "Moldova",
+                                            "103": "Monaco",
+                                            "104": "Mongolia",
+                                            "105": "Morocco",
+                                            "106": "Mozambique",
+                                            "107": "Namibia",
+                                            "108": "Nepal",
+                                            "109": "Netherlands",
+                                            "110": "Netherlands Antilles",
+                                            "111": "New Zealand",
+                                            "112": "Nicaragua",
+                                            "113": "Niger",
+                                            "114": "Nigeria",
+                                            "116": "Norway",
+                                            "117": "Oman",
+                                            "118": "Pakistan",
+                                            "119": "Panama",
+                                            "120": "Paraguay",
+                                            "121": "Peru",
+                                            "122": "Philippines",
+                                            "123": "Poland",
+                                            "124": "Portugal",
+                                            "126": "Qatar",
+                                            "127": "Reunion",
+                                            "128": "Romania",
+                                            "129": "Russia",
+                                            "130": "Rwanda",
+                                            "132": "Samoa (Independent)",
+                                            "133": "Saudi Arabia",
+                                            "134": "Senegal",
+                                            "135": "Seychelles",
+                                            "136": "Sierra Leone",
+                                            "137": "Singapore",
+                                            "138": "Slovakia",
+                                            "139": "Slovenia",
+                                            "140": "Somalia",
+                                            "141": "South Africa",
+                                            "142": "South Korea",
+                                            "143": "Spain",
+                                            "144": "Sri Lanka",
+                                            "146": "Suriname",
+                                            "147": "Swaziland",
+                                            "148": "Sweden",
+                                            "149": "Switzerland",
+                                            "152": "Taiwan",
+                                            "153": "Tanzania",
+                                            "154": "Thailand",
+                                            "155": "Togo",
+                                            "156": "Tunisia",
+                                            "157": "Turkiye",
+                                            "158": "Turkmenistan",
+                                            "159": "Uganda",
+                                            "161": "Ukraine",
+                                            "162": "United Arab Emirates",
+                                            "163": "Uruguay",
+                                            "164": "USA",
+                                            "165": "Uzbekistan",
+                                            "166": "Vatican City State (Holy See)",
+                                            "167": "Venezuela",
+                                            "168": "Vietnam",
+                                            "169": "Virgin Islands (British)",
+                                            "170": "Yemen",
+                                            "173": "Zambia",
+                                            "174": "Zimbabwe",
+                                            "175": "Antigua And Barbuda",
+                                            "176": "Anguilla",
+                                            "179": "Aruba",
+                                            "180": "Brunei Darussalam",
+                                            "181": "Bouvet Island",
+                                            "183": "Cook Islands",
+                                            "185": "Christmas Island",
+                                            "187": "Dominican Republic",
+                                            "188": "Western Sahara",
+                                            "189": "Falkland Islands",
+                                            "191": "Faroe Islands",
+                                            "192": "Grenada",
+                                            "193": "French Guiana",
+                                            "194": "Gibraltar",
+                                            "195": "Greenland",
+                                            "196": "Guadeloupe",
+                                            "198": "Guatemala",
+                                            "200": "Haiti",
+                                            "202": "Jamaica",
+                                            "203": "Kiribati",
+                                            "204": "Comoros",
+                                            "205": "Saint Kitts and Nevis",
+                                            "206": "Saint Lucia",
+                                            "207": "Marshall Islands",
+                                            "208": "Macau",
+                                            "210": "Martinique",
+                                            "212": "Mauritius",
+                                            "213": "New Caledonia",
+                                            "214": "Norfolk Island",
+                                            "215": "Nauru",
+                                            "217": "Niue",
+                                            "219": "Papua New Guinea",
+                                            "221": "Pitcairn",
+                                            "222": "Palau",
+                                            "223": "Solomon Islands",
+                                            "225": "Svalbard and Jan Mayen Islands",
+                                            "227": "San Marino",
+                                            "232": "Tonga",
+                                            "233": "Timor-Leste",
+                                            "234": "Trinidad and Tobago",
+                                            "235": "Tuvalu",
+                                            "237": "Saint Vincent and the Grenadines",
+                                            "239": "Vanuatu",
+                                            "241": "Mayotte",
+                                            "242": "Myanmar",
+                                            "255": "Sao Tome and Principe",
+                                            "257": "South Georgia and the South Sandwich Islands",
+                                            "260": "Tajikistan",
+                                            "262": "United Kingdom",
+                                            "268": "Costa Rica",
+                                            "270": "Guernsey",
+                                            "272": "North Korea",
+                                            "274": "Afghanistan",
+                                            "275": "Cote D'Ivoire",
+                                            "276": "Cuba",
+                                            "277": "French Polynesia",
+                                            "278": "Iran",
+                                            "279": "Iraq",
+                                            "281": "Libya",
+                                            "282": "Palestine",
+                                            "285": "Syria",
+                                            "286": "Aaland Islands",
+                                            "287": "Turks & Caicos Islands",
+                                            "288": "Jersey  (Channel Islands)",
+                                            "289": "Dominica",
+                                            "290": "Montenegro",
+                                            "293": "Sudan",
+                                            "294": "Montserrat",
+                                            "298": "Curacao",
+                                            "302": "Sint Maarten",
+                                            "311": "South Sudan",
+                                            "315": "Republic of Kosovo",
+                                            "318": "Congo, Democratic Republic of the",
+                                            "323": "Isle of Man",
+                                            "324": "Saint Martin",
+                                            "325": "Bonaire, Saint Eustatius and Saba",
+                                            "326": "Serbia",
+                                            "327": "Saint Barthelemy"
+                                        },
+                                        "defaultcountry": 164
+                                    },
+                                    "PHONE": {
+                                        "name": "PHONE",
+                                        "label": "Phone Number",
+                                        "helper_text": "",
+                                        "type": "phone",
+                                        "required": false,
+                                        "audience_field_name": "Phone Number",
+                                        "phoneformat": "",
+                                        "enabled": false,
+                                        "order": null,
+                                        "field_type": "merge",
+                                        "merge_id": 4
+                                    },
+                                    "BIRTHDAY": {
+                                        "name": "BIRTHDAY",
+                                        "label": "Birthday",
+                                        "helper_text": "",
+                                        "type": "birthday",
+                                        "required": false,
+                                        "audience_field_name": "Birthday",
+                                        "dateformat": "MM/DD",
+                                        "enabled": false,
+                                        "order": null,
+                                        "field_type": "merge",
+                                        "merge_id": 5
+                                    },
+                                    "COMPANY": {
+                                        "name": "COMPANY",
+                                        "label": "Company",
+                                        "helper_text": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "audience_field_name": "Company",
+                                        "enabled": false,
+                                        "order": null,
+                                        "field_type": "merge",
+                                        "merge_id": 6
+                                    }
+                                }).find(function(f) { return f.name === fieldName && f.type === 'smsphone'; });
+                                var isRequired = smsField ? smsField.required : false;
+                                var shouldAppendCountryCode = smsNotRequiredRemoveCountryCodeEnabled ? isRequired :
+                                true;
+                                var phoneInput = document.querySelector('#mce-' + fieldName);
+                                if (phoneInput && defaultProgram.countryCallingCode && shouldAppendCountryCode) {
+                                    phoneInput.value = defaultProgram.countryCallingCode;
+                                }
+                                displayFlag?.addEventListener('click', function(e) {
+                                    dropdown.focus();
+                                });
+                                dropdown?.addEventListener('change', function() {
+                                    const selectedCountry = this.value;
+                                    if (!selectedCountry || typeof selectedCountry !== 'string') {
+                                        return;
+                                    }
+                                    const flagSpan = displayFlag?.querySelector('#flag-emoji-' +
+                                    fieldName);
+                                    if (flagSpan) {
+                                        flagSpan.textContent = getCountryUnicodeFlag(selectedCountry);
+                                        flagSpan.setAttribute('aria-label', sanitizeHtml(
+                                            selectedCountry) + ' flag');
+                                    }
+                                    const selectedProgram = window.MC?.smsPhoneData?.programs.find(
+                                        function(program) {
+                                            return program && program.countryCode ===
+                                            selectedCountry;
+                                        });
+                                    var smsNotRequiredRemoveCountryCodeEnabled = true;
+                                    var smsField = Object.values({
+                                        "EMAIL": {
+                                            "name": "EMAIL",
+                                            "label": "Email Address",
+                                            "helper_text": "",
+                                            "type": "email",
+                                            "required": true,
+                                            "audience_field_name": "Email Address",
+                                            "merge_id": 0,
+                                            "help_text_enabled": false,
+                                            "enabled": true,
+                                            "order": 0,
+                                            "field_type": "merge"
+                                        },
+                                        "FNAME": {
+                                            "name": "FNAME",
+                                            "label": "First Name",
+                                            "helper_text": "",
+                                            "type": "text",
+                                            "required": false,
+                                            "audience_field_name": "First Name",
+                                            "merge_id": 1,
+                                            "help_text_enabled": false,
+                                            "enabled": true,
+                                            "order": 1,
+                                            "field_type": "merge"
+                                        },
+                                        "LNAME": {
+                                            "name": "LNAME",
+                                            "label": "Last Name",
+                                            "helper_text": "",
+                                            "type": "text",
+                                            "required": false,
+                                            "audience_field_name": "Last Name",
+                                            "enabled": false,
+                                            "order": null,
+                                            "field_type": "merge",
+                                            "merge_id": 2
+                                        },
+                                        "ADDRESS": {
+                                            "name": "ADDRESS",
+                                            "label": "Address",
+                                            "helper_text": "",
+                                            "type": "address",
+                                            "required": false,
+                                            "audience_field_name": "Address",
+                                            "enabled": false,
+                                            "order": null,
+                                            "field_type": "merge",
+                                            "merge_id": 3,
+                                            "countries": {
+                                                "2": "Albania",
+                                                "3": "Algeria",
+                                                "4": "Andorra",
+                                                "5": "Angola",
+                                                "6": "Argentina",
+                                                "7": "Armenia",
+                                                "8": "Australia",
+                                                "9": "Austria",
+                                                "10": "Azerbaijan",
+                                                "11": "Bahamas",
+                                                "12": "Bahrain",
+                                                "13": "Bangladesh",
+                                                "14": "Barbados",
+                                                "15": "Belarus",
+                                                "16": "Belgium",
+                                                "17": "Belize",
+                                                "18": "Benin",
+                                                "19": "Bermuda",
+                                                "20": "Bhutan",
+                                                "21": "Bolivia",
+                                                "22": "Bosnia and Herzegovina",
+                                                "23": "Botswana",
+                                                "24": "Brazil",
+                                                "25": "Bulgaria",
+                                                "26": "Burkina Faso",
+                                                "27": "Burundi",
+                                                "28": "Cambodia",
+                                                "29": "Cameroon",
+                                                "30": "Canada",
+                                                "31": "Cape Verde",
+                                                "32": "Cayman Islands",
+                                                "33": "Central African Republic",
+                                                "34": "Chad",
+                                                "35": "Chile",
+                                                "36": "China",
+                                                "37": "Colombia",
+                                                "38": "Congo",
+                                                "40": "Croatia",
+                                                "41": "Cyprus",
+                                                "42": "Czech Republic",
+                                                "43": "Denmark",
+                                                "44": "Djibouti",
+                                                "45": "Ecuador",
+                                                "46": "Egypt",
+                                                "47": "El Salvador",
+                                                "48": "Equatorial Guinea",
+                                                "49": "Eritrea",
+                                                "50": "Estonia",
+                                                "51": "Ethiopia",
+                                                "52": "Fiji",
+                                                "53": "Finland",
+                                                "54": "France",
+                                                "56": "Gabon",
+                                                "57": "Gambia",
+                                                "58": "Georgia",
+                                                "59": "Germany",
+                                                "60": "Ghana",
+                                                "61": "Greece",
+                                                "63": "Guinea",
+                                                "64": "Guinea-Bissau",
+                                                "65": "Guyana",
+                                                "66": "Honduras",
+                                                "67": "Hong Kong",
+                                                "68": "Hungary",
+                                                "69": "Iceland",
+                                                "70": "India",
+                                                "71": "Indonesia",
+                                                "74": "Ireland",
+                                                "75": "Israel",
+                                                "76": "Italy",
+                                                "78": "Japan",
+                                                "79": "Jordan",
+                                                "80": "Kazakhstan",
+                                                "81": "Kenya",
+                                                "82": "Kuwait",
+                                                "83": "Kyrgyzstan",
+                                                "84": "Lao People's Democratic Republic",
+                                                "85": "Latvia",
+                                                "86": "Lebanon",
+                                                "87": "Lesotho",
+                                                "88": "Liberia",
+                                                "90": "Liechtenstein",
+                                                "91": "Lithuania",
+                                                "92": "Luxembourg",
+                                                "93": "Macedonia",
+                                                "94": "Madagascar",
+                                                "95": "Malawi",
+                                                "96": "Malaysia",
+                                                "97": "Maldives",
+                                                "98": "Mali",
+                                                "99": "Malta",
+                                                "100": "Mauritania",
+                                                "101": "Mexico",
+                                                "102": "Moldova",
+                                                "103": "Monaco",
+                                                "104": "Mongolia",
+                                                "105": "Morocco",
+                                                "106": "Mozambique",
+                                                "107": "Namibia",
+                                                "108": "Nepal",
+                                                "109": "Netherlands",
+                                                "110": "Netherlands Antilles",
+                                                "111": "New Zealand",
+                                                "112": "Nicaragua",
+                                                "113": "Niger",
+                                                "114": "Nigeria",
+                                                "116": "Norway",
+                                                "117": "Oman",
+                                                "118": "Pakistan",
+                                                "119": "Panama",
+                                                "120": "Paraguay",
+                                                "121": "Peru",
+                                                "122": "Philippines",
+                                                "123": "Poland",
+                                                "124": "Portugal",
+                                                "126": "Qatar",
+                                                "127": "Reunion",
+                                                "128": "Romania",
+                                                "129": "Russia",
+                                                "130": "Rwanda",
+                                                "132": "Samoa (Independent)",
+                                                "133": "Saudi Arabia",
+                                                "134": "Senegal",
+                                                "135": "Seychelles",
+                                                "136": "Sierra Leone",
+                                                "137": "Singapore",
+                                                "138": "Slovakia",
+                                                "139": "Slovenia",
+                                                "140": "Somalia",
+                                                "141": "South Africa",
+                                                "142": "South Korea",
+                                                "143": "Spain",
+                                                "144": "Sri Lanka",
+                                                "146": "Suriname",
+                                                "147": "Swaziland",
+                                                "148": "Sweden",
+                                                "149": "Switzerland",
+                                                "152": "Taiwan",
+                                                "153": "Tanzania",
+                                                "154": "Thailand",
+                                                "155": "Togo",
+                                                "156": "Tunisia",
+                                                "157": "Turkiye",
+                                                "158": "Turkmenistan",
+                                                "159": "Uganda",
+                                                "161": "Ukraine",
+                                                "162": "United Arab Emirates",
+                                                "163": "Uruguay",
+                                                "164": "USA",
+                                                "165": "Uzbekistan",
+                                                "166": "Vatican City State (Holy See)",
+                                                "167": "Venezuela",
+                                                "168": "Vietnam",
+                                                "169": "Virgin Islands (British)",
+                                                "170": "Yemen",
+                                                "173": "Zambia",
+                                                "174": "Zimbabwe",
+                                                "175": "Antigua And Barbuda",
+                                                "176": "Anguilla",
+                                                "179": "Aruba",
+                                                "180": "Brunei Darussalam",
+                                                "181": "Bouvet Island",
+                                                "183": "Cook Islands",
+                                                "185": "Christmas Island",
+                                                "187": "Dominican Republic",
+                                                "188": "Western Sahara",
+                                                "189": "Falkland Islands",
+                                                "191": "Faroe Islands",
+                                                "192": "Grenada",
+                                                "193": "French Guiana",
+                                                "194": "Gibraltar",
+                                                "195": "Greenland",
+                                                "196": "Guadeloupe",
+                                                "198": "Guatemala",
+                                                "200": "Haiti",
+                                                "202": "Jamaica",
+                                                "203": "Kiribati",
+                                                "204": "Comoros",
+                                                "205": "Saint Kitts and Nevis",
+                                                "206": "Saint Lucia",
+                                                "207": "Marshall Islands",
+                                                "208": "Macau",
+                                                "210": "Martinique",
+                                                "212": "Mauritius",
+                                                "213": "New Caledonia",
+                                                "214": "Norfolk Island",
+                                                "215": "Nauru",
+                                                "217": "Niue",
+                                                "219": "Papua New Guinea",
+                                                "221": "Pitcairn",
+                                                "222": "Palau",
+                                                "223": "Solomon Islands",
+                                                "225": "Svalbard and Jan Mayen Islands",
+                                                "227": "San Marino",
+                                                "232": "Tonga",
+                                                "233": "Timor-Leste",
+                                                "234": "Trinidad and Tobago",
+                                                "235": "Tuvalu",
+                                                "237": "Saint Vincent and the Grenadines",
+                                                "239": "Vanuatu",
+                                                "241": "Mayotte",
+                                                "242": "Myanmar",
+                                                "255": "Sao Tome and Principe",
+                                                "257": "South Georgia and the South Sandwich Islands",
+                                                "260": "Tajikistan",
+                                                "262": "United Kingdom",
+                                                "268": "Costa Rica",
+                                                "270": "Guernsey",
+                                                "272": "North Korea",
+                                                "274": "Afghanistan",
+                                                "275": "Cote D'Ivoire",
+                                                "276": "Cuba",
+                                                "277": "French Polynesia",
+                                                "278": "Iran",
+                                                "279": "Iraq",
+                                                "281": "Libya",
+                                                "282": "Palestine",
+                                                "285": "Syria",
+                                                "286": "Aaland Islands",
+                                                "287": "Turks & Caicos Islands",
+                                                "288": "Jersey  (Channel Islands)",
+                                                "289": "Dominica",
+                                                "290": "Montenegro",
+                                                "293": "Sudan",
+                                                "294": "Montserrat",
+                                                "298": "Curacao",
+                                                "302": "Sint Maarten",
+                                                "311": "South Sudan",
+                                                "315": "Republic of Kosovo",
+                                                "318": "Congo, Democratic Republic of the",
+                                                "323": "Isle of Man",
+                                                "324": "Saint Martin",
+                                                "325": "Bonaire, Saint Eustatius and Saba",
+                                                "326": "Serbia",
+                                                "327": "Saint Barthelemy"
+                                            },
+                                            "defaultcountry": 164
+                                        },
+                                        "PHONE": {
+                                            "name": "PHONE",
+                                            "label": "Phone Number",
+                                            "helper_text": "",
+                                            "type": "phone",
+                                            "required": false,
+                                            "audience_field_name": "Phone Number",
+                                            "phoneformat": "",
+                                            "enabled": false,
+                                            "order": null,
+                                            "field_type": "merge",
+                                            "merge_id": 4
+                                        },
+                                        "BIRTHDAY": {
+                                            "name": "BIRTHDAY",
+                                            "label": "Birthday",
+                                            "helper_text": "",
+                                            "type": "birthday",
+                                            "required": false,
+                                            "audience_field_name": "Birthday",
+                                            "dateformat": "MM/DD",
+                                            "enabled": false,
+                                            "order": null,
+                                            "field_type": "merge",
+                                            "merge_id": 5
+                                        },
+                                        "COMPANY": {
+                                            "name": "COMPANY",
+                                            "label": "Company",
+                                            "helper_text": "",
+                                            "type": "text",
+                                            "required": false,
+                                            "audience_field_name": "Company",
+                                            "enabled": false,
+                                            "order": null,
+                                            "field_type": "merge",
+                                            "merge_id": 6
+                                        }
+                                    }).find(function(f) { return f.name === fieldName && f.type ===
+                                        'smsphone'; });
+                                    var isRequired = smsField ? smsField.required : false;
+                                    var shouldAppendCountryCode = smsNotRequiredRemoveCountryCodeEnabled ?
+                                        isRequired : true;
+                                    var phoneInput = document.querySelector('#mce-' + fieldName);
+                                    if (phoneInput && selectedProgram.countryCallingCode &&
+                                        shouldAppendCountryCode) {
+                                        phoneInput.value = selectedProgram.countryCallingCode;
+                                    }
+                                    updateSmsLegalText(selectedCountry, fieldName);
+                                    updatePlaceholder(selectedCountry, fieldName);
+                                    updateCountryCodeInstruction(selectedCountry, fieldName);
+                                });
+                            }
+
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const smsPhoneFields = document.querySelectorAll('[id^="country-select-"]');
+                                smsPhoneFields.forEach(function(dropdown) {
+                                    const fieldName = dropdown?.id.replace('country-select-', '');
+                                    initializeSmsPhoneDropdown(fieldName);
+                                });
+                            });
+                        </script>
+                    </div>
+                    <!-- ===== END MAILCHIMP ===== -->
+                </div>
+
+                <p class="text-xs text-[#A3A49C] mt-6 font-poppins max-w-sm mx-auto">
+                    No spam, ever. Unsubscribe anytime with one click.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== SECTION 5 — CONTACT ===== -->
         <section id="contact" class="px-5 py-16 md:py-24 scroll-mt-8">
             <div class="max-w-3xl mx-auto text-center">
                 <span class="kicker-label block mb-2">SAY HELLO</span>
@@ -380,7 +1971,6 @@
                 <p class="font-poppins text-base text-[#63645C] mt-3 leading-relaxed">
                     We'd genuinely love to hear from you.
                 </p>
-
                 <div class="mt-6">
                     <a href="mailto:kind72656@gmail.com" class="btn-email" aria-label="Email us">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -391,16 +1981,14 @@
                     </a>
                 </div>
                 <span class="hidden-email" aria-hidden="true">kind72656@gmail.com</span>
-
                 <div class="mt-8 flex justify-center gap-4">
                     <a href="#" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.04 2.45 7.48 5.92 8.99-.08-.76-.15-1.94.03-2.78.17-.76 1.08-4.57 1.08-4.57s-.28-.56-.28-1.39c0-1.3.75-2.27 1.69-2.27.8 0 1.18.6 1.18 1.32 0 .8-.51 2.01-.77 3.12-.22.93.47 1.69 1.39 1.69 1.67 0 2.95-1.76 2.95-4.3 0-2.25-1.62-3.82-3.93-3.82-2.68 0-4.25 2.01-4.25 4.08 0 .81.31 1.68.7 2.15.08.1.09.19.06.29-.07.29-.23.93-.26 1.06-.04.17-.14.21-.32.13-1.2-.56-1.95-2.31-1.95-3.72 0-3.03 2.2-5.81 6.34-5.81 3.33 0 5.92 2.37 5.92 5.54 0 3.31-2.09 5.97-4.98 5.97-.97 0-1.88-.5-2.19-1.1l-.6 2.28c-.22.84-.81 1.89-1.21 2.53.91.28 1.87.43 2.87.43 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.04 2.45 7.48 5.92 8.99-.08-.76-.15-1.94.03-2.78.17-.76 1.08-4.57 1.08-4.57s-.28-.56-.28-1.39c0-1.3.75-2.27 1.69-2.27.8 0 1.18.6 1.18 1.32 0 .8-.51 2.01-.77 3.12-.22.93.47 1.69 1.39 1.69 1.67 0 2.95-1.76 2.95-4.3 0-2.25-1.62-3.82-3.93-3.82-2.68 0-4.25 2.01-4.25 4.08 0 .81.31 1.68.7 2.15.08.1.09.19.06.29-.07.29-.23.93-.26 1.06-.04.17-.14.21-.32.13-1.2-.56-1.95-2.31-1.95-3.72 0-3.03 2.2-5.81 6.34-5.81 3.33 0 5.92 2.37 5.92 5.54 0 3.31-2.09 5.97-4.98 5.97-.97 0-1.88-.5-2.19-1.1l-.6 2.28c-.22.84-.81 1.89-1.21 2.53.91.28 1.87.43 2.87.43 5.52 0 10-4.48 10-10S17.52 2 12 2z" />
                         </svg>
                     </a>
-                  
                 </div>
-             <p class="text-xs text-[#A3A49C] mt-8 font-poppins max-w-sm mx-auto">
+                <p class="text-xs text-[#A3A49C] mt-8 font-poppins max-w-sm mx-auto">
                     Health Signal provides general wellness information and is not a substitute for medical advice.
                 </p>
             </div>
@@ -421,17 +2009,191 @@
 
     </main>
 
+    <!-- ===== GATE LOGIC ===== -->
     <script>
-        (function() 
-            document.querySelector('.scroll-cue')?.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector('#guide-one');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
+        (function() {
+            'use strict';
+
+            const STORAGE_KEY = 'health_signal_subscribed';
+            let isSubscribed = localStorage.getItem(STORAGE_KEY) === 'true';
+            let pendingGuide = null;
+
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const signupContainer = document.getElementById('signup-form-container');
+            const downloadButtons = document.querySelectorAll('.btn-download');
+
+            function downloadPDF(pdfPath, guideName) {
+                const link = document.createElement('a');
+                link.href = pdfPath;
+                link.download = pdfPath.split('/').pop();
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showToast('📥 Downloading "' + guideName + '" …');
+            }
+
+            function showToast(msg, duration) {
+                duration = duration || 4000;
+                toastMessage.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toast._hideTimer);
+                toast._hideTimer = setTimeout(function() {
+                    toast.classList.remove('show');
+                }, duration);
+            }
+
+            function scrollToSignup() {
+                const target = document.getElementById('subscribe');
+                if (!target) return;
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(function() {
+                    signupContainer.classList.add('form-highlight');
+                    setTimeout(function() {
+                        signupContainer.classList.remove('form-highlight');
+                    }, 2400);
+                }, 500);
+                setTimeout(function() {
+                    const emailInput = document.getElementById('mce-EMAIL');
+                    if (emailInput) emailInput.focus();
+                }, 700);
+            }
+
+            function updateButtons() {
+                downloadButtons.forEach(function(btn) {
+                    const guide = btn.dataset.guide;
+                    const pdf = btn.dataset.pdf;
+                    const textSpan = btn.querySelector('.btn-text');
+                    const lockIcon = btn.querySelector('.lock-icon');
+
+                    if (isSubscribed) {
+                        btn.classList.remove('locked');
+                        btn.classList.add('unlocked');
+                        if (textSpan) textSpan.textContent = 'Download PDF';
+                        if (lockIcon) lockIcon.textContent = '⬇';
+                        btn.setAttribute('aria-label', 'Download ' + (guide || 'guide'));
+
+                        const badgeId = guide === 'gut-healing' ? 'badge-gut-healing' : 'badge-self-care';
+                        const badge = document.getElementById(badgeId);
+                        if (badge) {
+                            badge.textContent = '✅ unlocked';
+                            badge.classList.add('unlocked');
+                        }
+
+                        btn.onclick = function(e) {
+                            e.preventDefault();
+                            if (pdf) {
+                                const name = guide === 'gut-healing' ? 'Gut Healing Recipes' : 'Self-Care Reset';
+                                downloadPDF(pdf, name);
+                            } else {
+                                showToast('⚠️ PDF file not found.', 3000);
+                            }
+                        };
+                    } else {
+                        btn.classList.add('locked');
+                        btn.classList.remove('unlocked');
+                        if (textSpan) textSpan.textContent = 'Subscribe to Download';
+                        if (lockIcon) lockIcon.textContent = '🔒';
+                        btn.setAttribute('aria-label', 'Subscribe to download ' + (guide || 'guide'));
+
+                        const badgeId = guide === 'gut-healing' ? 'badge-gut-healing' : 'badge-self-care';
+                        const badge = document.getElementById(badgeId);
+                        if (badge) {
+                            badge.textContent =  subscribe to unlock';
+                            badge.classList.remove('unlocked');
+                        }
+
+                        btn.onclick = function(e) {
+                            e.preventDefault();
+                            pendingGuide = guide;
+                            scrollToSignup();
+                            showToast('📧 Subscribe to unlock your guide.', 3000);
+                        };
+                    }
+                });
+            }
+
+            // Watch for Mailchimp success
+            function watchMailchimpSuccess() {
+                const successDiv = document.getElementById('mce-success-response');
+                if (!successDiv) return;
+                const observer = new MutationObserver(function() {
+                    const style = window.getComputedStyle(successDiv);
+                    if (style.display !== 'none' && successDiv.textContent.trim().length > 0) {
+                        if (!isSubscribed) {
+                            isSubscribed = true;
+                            localStorage.setItem(STORAGE_KEY, 'true');
+                            updateButtons();
+                            showToast('🎉 You\'re subscribed! Your guide is now unlocked.', 5000);
+                            if (pendingGuide) {
+                                const btn = document.querySelector('.btn-download[data-guide="' + pendingGuide +
+                                    '"]');
+                                if (btn && btn.dataset.pdf) {
+                                    const name = pendingGuide === 'gut-healing' ? 'Gut Healing Recipes' :
+                                        'Self-Care Reset';
+                                    setTimeout(function() {
+                                        downloadPDF(btn.dataset.pdf, name);
+                                    }, 800);
+                                }
+                                pendingGuide = null;
+                            }
+                        }
+                    }
+                });
+                observer.observe(successDiv, { attributes: true, attributeFilter: ['style'], childList: true,
+                    subtree: true, characterData: true });
+            }
+
+            function watchMailchimpError() {
+                const errorDiv = document.getElementById('mce-error-response');
+                if (!errorDiv) return;
+                const observer = new MutationObserver(function() {
+                    const style = window.getComputedStyle(errorDiv);
+                    if (style.display !== 'none' && errorDiv.textContent.trim().length > 0) {
+                        pendingGuide = null; // clear pending on error
+                    }
+                });
+                observer.observe(errorDiv, { attributes: true, attributeFilter: ['style'], childList: true,
+                    subtree: true, characterData: true });
+            }
+
+            function init() {
+                updateButtons();
+                watchMailchimpSuccess();
+                watchMailchimpError();
+                // Re-check success after Mailchimp scripts load
+                setTimeout(function() {
+                    const successDiv = document.getElementById('mce-success-response');
+                    if (successDiv) {
+                        const style = window.getComputedStyle(successDiv);
+                        if (style.display !== 'none' && successDiv.textContent.trim().length > 0) {
+                            if (!isSubscribed) {
+                                isSubscribed = true;
+                                localStorage.setItem(STORAGE_KEY, 'true');
+                                updateButtons();
+                                showToast('🎉 Welcome back! Your guides are unlocked.', 4000);
+                            }
+                        }
+                    }
+                }, 1500);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+            // Manual unlock for testing
+            window.unlockGuides = function() {
+                isSubscribed = true;
+                localStorage.setItem(STORAGE_KEY, 'true');
+                updateButtons();
+                showToast('🔓 Guides unlocked!', 3000);
+            };
         })();
     </script>
 
 </body>
-</html>
+ </html>
+      
